@@ -21,7 +21,7 @@ token: String,
 ```js
 Sneaker is comprised of the following:
 
-shoeName: {
+name: {
     type: String,
     required: true,
 },
@@ -29,35 +29,22 @@ brand: {
     type: String,
     required: true,
 },
-silhouette: {
-    type: String,
-},
-styleID: {
-    type: String,
-},
 colorway: {
     type: String,
-},
-description: {
-    type: String,
-    required: true,
-},
-retailPrice: {
-    type: Number,
 },
 imageLink: {
     type: String,
 },
 condition: {
     type: String,
-    enum: ['mint', 'used', 'beaters']
+    enum: ['mint', 'used', 'beaters'],
     required: true,
     default: 'mint', 
-}
+},
 owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-}
+},
 ```
 
 ## Routes
