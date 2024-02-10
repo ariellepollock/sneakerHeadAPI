@@ -45,7 +45,7 @@ router.get('/sneakers', (req, res, next) => {
 
 // SHOW
 // GET /sneakers/5a7db6c74d55bc51bdf39793
-router.get('/sneakers/:id', requireToken, (req, res, next) => {
+router.get('/sneakers/:id', (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Sneaker.findById(req.params.id)
 		.then(handle404)

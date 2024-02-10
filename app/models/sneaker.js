@@ -12,9 +12,11 @@ const sneakerSchema = new mongoose.Schema(
 		},
         colorway: {
             type: String,
+            required: true,
         },
         releaseYear: {
             type: Number,
+            required: true,
         },
         // imageLink: {
         //     type: String,
@@ -34,5 +36,14 @@ const sneakerSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 )
+
+// define virtuals below (optional)
+// add virtual to define if a sneaker is considered vintage
+sneakerSchema.virtual('isVintage').get(function () {
+    const currentYear = new Date().getFullYear()
+    if (this.releaseYear <= currentYear - 40) {
+        return "VINTAGE"
+    }
+})
 
 module.exports = mongoose.model('Sneaker', sneakerSchema)
