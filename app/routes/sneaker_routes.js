@@ -43,6 +43,22 @@ router.get('/sneakers', (req, res, next) => {
 		.catch(next)
 })
 
+// route for logged in user's sneakers - index
+// GET /sneakers/mine
+router.get('/sneakers/mine', requireToken, (req, res, next) => {
+	Sneaker.find({ owner: req.user.id })
+		.then((sneakers) => {
+			// `sneakers` will be an array of Mongoose documents
+			// we want to convert each one to a POJO, so we use `.map` to
+			// apply `.toObject` to each one
+			return sneakers.map((sneaker) => sneaker.toObject())
+		})
+		// respond with status 200 and JSON of the sneakers
+		.then((sneakers) => res.status(200).json({ sneakers: sneakers }))
+		// if an error occurs, pass it to the handler
+		.catch(next)
+})
+
 // SHOW
 // GET /sneakers/5a7db6c74d55bc51bdf39793
 router.get('/sneakers/:id', (req, res, next) => {
